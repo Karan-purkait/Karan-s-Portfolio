@@ -9,7 +9,7 @@ import Image from "next/image"
 
 const projects = [
   {
-    title: "The CodeBird Platform",
+    title: "The CodeBird Official Platform",
     description:
       "A full-featured e-commerce platform with payment integration, user authentication, and admin dashboard.",
     image: "/codebird.png?height=600&width=800",
