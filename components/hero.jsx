@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Download } from "lucide-react"
 import Image from "next/image"
 
+  const handleClick = () => {
+    window.open("https://karanpurkait.vercel.app/", "_blank"); // Replace with your link
+  };
 export default function Hero() {
   // Smooth scroll function
   const scrollToSection = (e, sectionId) => {
@@ -18,6 +21,7 @@ export default function Hero() {
       })
     }
   }
+  
 
   return (
     <section id="home" className="pt-32 pb-20 md:pt-40 md:pb-32 relative">
@@ -77,12 +81,14 @@ export default function Hero() {
               Get in touch
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button
+            <Button 
+            onClick={handleClick} 
               variant="outline"
               size="lg"
               className="group border-purple-500/30 text-white hover:bg-purple-500/20 hover:text-white transition-all duration-300"
             >
               <Download className="mr-2 h-4 w-20" />
+              
               Download CV
             </Button>
           </motion.div>
