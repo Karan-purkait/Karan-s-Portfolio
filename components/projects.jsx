@@ -11,12 +11,13 @@ const projects = [
   {
     title: "The CodeBird Official Platform",
     description:
-      "A dynamic platform showcasing CodeBird’s events, projects, and member achievements with a user-friendly and responsive design.",
+      "A dynamic platform showcasing CodeBird’s events, projects, and member achievements with a user-friendly and responsive design." ,
     image: "/codebird.png?height=600&width=800",
     tags: ["React", "Node.js", "MongoDB", "Express js","Tailwind CSS"],
     liveLink: "https://thecodebirdofficial.vercel.app/",
     githubLink: "https://github.com/Karan-purkait/The-CodeBird",
   },
+  
   // {
   //   title: "Social Media Dashboard",
   //   description: "A comprehensive dashboard for social media management with analytics and scheduling features.",
@@ -206,5 +207,5 @@ export default function Projects() {
       </div>
     </section>
   )
-}
+} 
 
