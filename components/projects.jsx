@@ -18,6 +18,8 @@ const projects = [
     githubLink: "https://github.com/Karan-purkait/The-CodeBird",
   },
   
+
+  
   // {
   //   title: "Social Media Dashboard",
   //   description: "A comprehensive dashboard for social media management with analytics and scheduling features.",
