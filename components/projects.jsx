@@ -20,22 +20,22 @@ const projects = [
   
 
   
-  // {
-  //   title: "Social Media Dashboard",
-  //   description: "A comprehensive dashboard for social media management with analytics and scheduling features.",
-  //   image: "/placeholder.svg?height=600&width=800",
-  //   tags: ["Next.js", "Tailwind CSS", "Firebase", "Chart.js"],
-  //   liveLink: "#",
-  //   githubLink: "#",
-  // },
-  // {
-  //   title: "Task Management App",
-  //   description: "A collaborative task management application with real-time updates and team collaboration features.",
-  //   image: "/placeholder.svg?height=600&width=800",
-  //   tags: ["React", "Redux", "Express", "Socket.io"],
-  //   liveLink: "#",
-  //   githubLink: "#",
-  // },
+  {
+    title: "My collage Grade Calculator",
+    description: "This web-based College Grade Calculator helps students track and predict their academic performance by allowing them to input assignment scores, category weights, and course credits to calculate course grades and semester GPAs, including what-if scenarios.",
+    image: "/sgpa.png?height=600&width=800",
+    tags: ["React.js", "Tailwind CSS", "Material UI","SEO"],
+    liveLink: "https://uitcgpa-calculator.vercel.app/",
+    githubLink: "https://github.com/Karan-purkait/sgpa-calculator",
+  },
+  {
+    title: "MeetUp",
+    description: "Meetup connects people with shared interests through local events, which can be in-person or online via video conferencing, similar to how Zoom facilitates virtual gatherings.",
+    image: "/meet.png?height=600&width=800",
+    tags: ["React", "Redux", "Express", "Socket.io"],
+    liveLink: "https://meet-up-zeta-two.vercel.app/",
+    githubLink: "https://github.com/Karan-purkait/MeetUp",
+  },
   // {
   //   title: "Fitness Tracking App",
   //   description:

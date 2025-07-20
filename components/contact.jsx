@@ -1,9 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter, X } from "lucide-react" // Added X for close icon
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -18,6 +17,11 @@ export default function Contact() {
     subject: "",
     message: "",
   })
+  // State for managing form submission status and message display
+  const [submitStatus, setSubmitStatus] = useState({
+    type: 'idle', // 'idle', 'loading', 'success', 'error'
+    message: null,
+  });
 
   const handleChange = (e) => {
     setFormState({
@@ -26,17 +30,54 @@ export default function Contact() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(formState)
-    // Here you would typically send the form data to your backend
-    alert("Form submitted! (This is just a demo)")
-    setFormState({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    })
+    setSubmitStatus({ type: 'loading', message: 'Sending your message...' });
+
+    // IMPORTANT: Replace 'YOUR_FORMSPREE_ENDPOINT_HERE' with your actual Formspree endpoint.
+    // You can get this by signing up at formspree.io and creating a new form.
+    const formspreeEndpoint = "https://formspree.io/f/mnnzjdkp"; // Example: https://formspree.io/f/your_unique_id
+
+    try {
+      const response = await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(formState),
+      });
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: "Boom! Message sent. My inbox just got a little more interesting. I'll be in touch soon!"
+        });
+        setFormState({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        const data = await response.json();
+        setSubmitStatus({
+          type: 'error',
+          message: data.errors ? data.errors.map(err => err.message).join(", ") : "Oops! Something went wrong. Please try again later.",
+        });
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus({
+        type: 'error',
+        message: "Network error. Please check your internet connection and try again.",
+      });
+    } finally {
+      // Hide the message after a few seconds
+      setTimeout(() => {
+        setSubmitStatus({ type: 'idle', message: null });
+      }, 5000); // Message visible for 5 seconds
+    }
   }
 
   const fadeIn = {
@@ -94,7 +135,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-medium text-white">Location</h4>
-                  <p className="text-gray-300">Hooghly.712403,West Bengal</p>
+                  <p className="text-gray-300">Hooghly,712403,West Bengal</p>
                 </div>
               </motion.div>
 
@@ -146,14 +187,14 @@ export default function Contact() {
                 >
                   <Github className="w-5 h-5" />
                 </motion.a>
-                <motion.a
+                {/* <motion.a
                   href="#"
                   whileHover={{ y: -5, scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500/30 to-purple-500/30 flex items-center justify-center text-white hover:from-cyan-500/50 hover:to-purple-500/50 transition-colors duration-300"
                 >
                   <Twitter className="w-5 h-5" />
-                </motion.a>
+                </motion.a> */}
               </div>
             </div>
           </motion.div>
@@ -167,7 +208,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-white">
-                    Karan Purkait
+                    Your Name
                   </Label>
                   <Input
                     id="name"
@@ -226,15 +267,39 @@ export default function Contact() {
               <Button
                 type="submit"
                 className="w-full group bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white border-none shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300"
+                disabled={submitStatus.type === 'loading'} // Disable button during submission
               >
-                Send Message
+                {submitStatus.type === 'loading' ? 'Sending...' : 'Send Message'}
                 <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </form>
+
+            {/* Custom Status Message Box */}
+            {submitStatus.type !== 'idle' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className={`mt-6 p-4 rounded-lg shadow-md flex items-center justify-between ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-500/20 border border-green-500/30 text-green-300'
+                    : 'bg-red-500/20 border border-red-500/30 text-red-300'
+                }`}
+              >
+                <p className="flex-grow">{submitStatus.message}</p>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setSubmitStatus({ type: 'idle', message: null })}
+                  className="text-white hover:bg-white/10"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </div>
     </section>
   )
 }
-

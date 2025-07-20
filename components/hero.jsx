@@ -3,11 +3,8 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Download } from "lucide-react"
-import Image from "next/image"
+// Removed: import Image from "next/image" // This import was causing the error
 
-  const handleClick = () => {
-    window.open("https://karanpurkait.vercel.app/", "_blank"); // Replace with your link
-  };
 export default function Hero() {
   // Smooth scroll function
   const scrollToSection = (e, sectionId) => {
@@ -21,7 +18,6 @@ export default function Hero() {
       })
     }
   }
-  
 
   return (
     <section id="home" className="pt-32 pb-20 md:pt-40 md:pb-32 relative">
@@ -81,16 +77,25 @@ export default function Hero() {
               Get in touch
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button 
-            onClick={handleClick} 
-              variant="outline"
-              size="lg"
-              className="group border-purple-500/30 text-white hover:bg-purple-500/20 hover:text-white transition-all duration-300"
+
+            {/* Corrected Download CV button */}
+            {/* The <a> tag is used to handle file downloads directly. */}
+            {/* The 'href' should point to the resume file in your 'public' folder. */}
+            {/* The 'download' attribute suggests a filename for the browser to use. */}
+            <a
+              href="/karan_purkait_Resume.pdf" // IMPORTANT: Replace with the exact filename of your resume in the 'public' folder
+              download="Karan_Purkait_Resume.pdf" // This is the suggested filename when the user downloads it
+              className="inline-block" // Ensures the link wrapper doesn't break button layout
             >
-              <Download className="mr-2 h-4 w-20" />
-              
-              Download CV
-            </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="group border-purple-500/30 text-white hover:bg-purple-500/20 hover:text-white transition-all duration-300"
+              >
+                <Download className="mr-2 h-4 w-20" /> {/* Icon for download */}
+                Download CV
+              </Button>
+            </a>
           </motion.div>
         </motion.div>
 
@@ -103,7 +108,8 @@ export default function Hero() {
           <div className="w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[400px] md:h-[400px] relative">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-500/30 to-purple-500/30 animate-pulse" />
             <div className="absolute inset-2 rounded-full overflow-hidden bg-indigo-950/50 backdrop-blur-sm border border-purple-500/20">
-              <Image
+              {/* Replaced Next.js Image component with standard <img> tag */}
+              <img
                 src="/mypic.jpg?height=400&width=400"
                 alt="Your Name"
                 width={400}
@@ -125,4 +131,3 @@ export default function Hero() {
     </section>
   )
 }
-

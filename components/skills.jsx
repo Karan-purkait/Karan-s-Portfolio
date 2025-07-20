@@ -3,9 +3,20 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { Database, Layout, Server, Smartphone, Figma, Cpu } from "lucide-react"
+import { Database, Layout, Server, Smartphone, Figma, Cpu ,ChevronsLeftRight } from "lucide-react"
 
 const skills = [
+   {
+    category: "Programming Language",
+    icon: <ChevronsLeftRight className="w-6 h-6" />,
+    items: [
+      { name: "Java", level: 95 },
+      { name: "JavaScript", level: 90 },
+      { name: "Python", level: 85 },
+  
+    ],
+    color: "from-red-500 to-red-400",
+  },
   {
     category: "Frontend",
     icon: <Layout className="w-6 h-6" />,
@@ -33,7 +44,6 @@ const skills = [
     items: [
       { name: "MongoDB", level: 85 },
       { name: "MySQL", level: 80 },
-      { name: "PostgreSQL", level: 75 },
       { name: "Firebase", level: 80 },
     ],
     color: "from-yellow-500 to-amber-400",
@@ -44,7 +54,6 @@ const skills = [
     icon: <Figma className="w-6 h-6" />,
     items: [
       { name: "Figma", level: 85 },
-      { name: "Illustrator", level: 65 },
       { name: "UI/UX", level: 80 },
     ],
     color: "from-pink-500 to-rose-400",
@@ -54,7 +63,7 @@ const skills = [
     icon: <Cpu className="w-6 h-6" />,
     items: [
       { name: "Git", level: 90 },
-      { name: "AWS", level: 70 },
+      { name: "GitHub", level: 70 },
       { name: "VScode", level: 75 },
       
     ],

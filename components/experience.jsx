@@ -6,15 +6,15 @@ import { useRef } from "react"
 import { Briefcase, GraduationCap, Award } from "lucide-react"
 
 const experiences = [
-  // {
-  //   type: "work",
-  //   title: "Senior Frontend Developer",
-  //   company: "Tech Solutions Inc.",
-  //   date: "2021 - Present",
-  //   description:
-  //     "Led the frontend development team in building responsive web applications using React and Next.js. Implemented modern UI/UX designs and improved performance by 40%.",
-  //   icon: <Briefcase className="h-5 w-5" />,
-  // },
+  {
+    type: "work",
+    title: "Frontend Developer",
+    company: "Shadow Fox",
+    date: "2025 - Present",
+    description:
+      "Led the frontend development team in building responsive web applications using React and Next.js. Implemented modern UI/UX designs and improved performance by 40%.",
+    icon: <Briefcase className="h-5 w-5" />,
+  },
   // {
   //   type: "education",
   //   title: "Master's in Computer Science",
