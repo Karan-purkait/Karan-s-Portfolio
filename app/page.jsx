@@ -25,7 +25,9 @@ export default function Home() {
 
   return (
     <CustomThemeProvider>
-      <div className="min-h-screen bg-gradient-to-b from-indigo-950 via-purple-900 to-indigo-950 dark:from-indigo-950 dark:via-purple-900 dark:to-indigo-950 overflow-hidden relative">
+      <div className="min-h-screen overflow-hidden relative bg-[#060b16]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.12),_transparent_26%),radial-gradient(circle_at_80%_20%,_rgba(251,191,36,0.08),_transparent_22%),linear-gradient(180deg,_rgba(8,15,32,0.96),_rgba(6,11,22,1))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-[size:110px_110px] opacity-[0.06]" />
         <AnimatedBackground />
         <Navbar />
         <main className="container mx-auto px-4 sm:px-6 relative z-10">

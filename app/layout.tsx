@@ -1,10 +1,21 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next"
+import { Cormorant_Garamond, Manrope } from "next/font/google"
+import "./globals.css"
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["500", "600", "700"],
+})
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: "Karan Purkait | Full-Stack Developer",
+  description: "Portfolio of Karan Purkait, a full-stack developer focused on polished digital products.",
 }
 
 export default function RootLayout({
@@ -14,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${manrope.variable} ${cormorant.variable}`}>{children}</body>
     </html>
   )
 }
