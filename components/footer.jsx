@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Heart } from "lucide-react"
+import Magnetic from "@/components/magnetic"
 
 export default function Footer() {
   // Smooth scroll function
@@ -28,13 +29,15 @@ export default function Footer() {
             transition={{ duration: 0.5 }}
             className="text-center md:text-left mb-4 md:mb-0"
           >
-            <Link
-              href="#home"
-              onClick={(e) => scrollToSection(e, "home")}
-              className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400"
-            >
-              Karan's Portfolio
-            </Link>
+            <Magnetic strength={0.2}>
+              <Link
+                href="#home"
+                onClick={(e) => scrollToSection(e, "home")}
+                className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400"
+              >
+                Karan's Portfolio
+              </Link>
+            </Magnetic>
           </motion.div>
 
           <motion.div

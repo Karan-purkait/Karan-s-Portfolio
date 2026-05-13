@@ -1,157 +1,109 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
+import { motion, useScroll, useSpring, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Briefcase, GraduationCap, Award } from "lucide-react"
+import { Briefcase, GraduationCap, Calendar, MapPin, Sparkles, Code2, Layers, Cpu } from "lucide-react"
+import SpotlightCard from "@/components/spotlight-card"
 
 const experiences = [
   {
     type: "work",
+    title: "Software Developer",
+    company: "Banerjee Electronics and Consultancy",
+    location: "Kolkata, IN",
+    date: "April 2026 - Present",
+    description: "Architecting scalable backend solutions and leading high-performance software projects. Focus on consultancy and technical leadership.",
+    skills: ["Next.js", "Node.js", "Consultancy", "System Design"],
+    icon: <Briefcase className="h-6 w-6" />,
+    color: "rgba(34, 211, 238, 0.2)"
+  },
+  {
+    type: "work",
     title: "Frontend Developer",
     company: "Shadow Fox",
-    date: "2025 - Present",
-    description:
-      "Led the frontend development team in building responsive web applications using React and Next.js. Implemented modern UI/UX designs and improved performance by 40%.",
-    icon: <Briefcase className="h-5 w-5" />,
+    location: "Remote",
+    date: "2025 - 2026",
+    description: "Spearheaded frontend transformation initiatives, resulting in a 40% performance boost. Specialized in Framer Motion and complex React architectures.",
+    skills: ["React", "Framer Motion", "UI Optimization", "Tailwind"],
+    icon: <Layers className="h-6 w-6" />,
+    color: "rgba(139, 92, 246, 0.2)"
   },
-  // {
-  //   type: "education",
-  //   title: "Master's in Computer Science",
-  //   company: "University of Technology",
-  //   date: "2019 - 2021",
-  //   description:
-  //     "Specialized in web technologies and artificial intelligence. Graduated with honors and completed a thesis on optimizing React applications.",
-  //   icon: <GraduationCap className="h-5 w-5" />,
-  // },
-  // {
-  //   type: "work",
-  //   title: "Frontend Developer",
-  //   company: "Digital Creations",
-  //   date: "2018 - 2021",
-  //   description:
-  //     "Developed and maintained multiple client websites using React, Vue.js, and vanilla JavaScript. Collaborated with designers to implement pixel-perfect UIs.",
-  //   icon: <Briefcase className="h-5 w-5" />,
-  // },
-  // {
-  //   type: "certification",
-  //   title: "AWS Certified Developer",
-  //   company: "Amazon Web Services",
-  //   date: "2020",
-  //   description:
-  //     "Earned certification demonstrating proficiency in developing, deploying, and debugging cloud-based applications using AWS.",
-  //   icon: <Award className="h-5 w-5" />,
-  // },
+  {
+    type: "work",
+    title: "Web Developer",
+    company: "Apexplannet Pvt. Ltd.",
+    location: "Hybrid",
+    date: "2024 - 2025",
+    description: "Developed enterprise-grade web applications with a focus on cross-platform responsiveness and robust API integrations.",
+    skills: ["JavaScript", "APIs", "Responsiveness", "Web Performance"],
+    icon: <Cpu className="h-6 w-6" />,
+    color: "rgba(16, 185, 129, 0.2)"
+  },
   {
     type: "education",
-    title: "Bachelor's in Computer Science Engineering",
-    company: "University Institute of Technology,The University of Burdwan",
+    title: "Bachelor's in CSE",
+    company: "University Institute of Technology, BU",
+    location: "Burdwan, WB",
     date: "2022 - 2026",
-    description:
-      "Studied software development principles, data structures, algorithms, and web development.",
-    icon: <GraduationCap className="h-5 w-5" />,
+    description: "Deep-diving into core Computer Science principles, algorithms, and advanced software engineering methodologies.",
+    skills: ["Algorithms", "Data Structures", "Engineering", "CS Fundamentals"],
+    icon: <GraduationCap className="h-6 w-6" />,
+    color: "rgba(245, 158, 11, 0.2)"
   },
-  // {
-  //   type: "certification",
-  //   title: "Google Cloud Professional",
-  //   company: "Google",
-  //   date: "2019",
-  //   description:
-  //     "Certified in designing, developing, and managing applications on Google Cloud Platform with a focus on scalability and security.",
-  //   icon: <Award className="h-5 w-5" />,
-  // },
 ]
 
 export default function Experience() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  })
 
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
 
   return (
-    <section id="experience" className="py-20 md:py-32 relative">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-full blur-[120px]" />
+    <section id="experience" className="py-24 md:py-40 relative overflow-hidden" ref={containerRef}>
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px]" />
       </div>
 
-      <div className="container mx-auto">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          transition={{ staggerChildren: 0.1 }}
-          className="text-center mb-16"
-        >
-          <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold mb-4 text-white">
-            Experience & Education
-          </motion.h2>
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mb-24">
           <motion.div
-            variants={fadeIn}
-            className="w-20 h-1.5 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto mb-6 rounded-full"
-          />
-          <motion.p variants={fadeIn} className="text-gray-300 max-w-2xl mx-auto">
-            My professional journey and educational background
-          </motion.p>
-        </motion.div>
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-2 text-sm font-medium text-cyan-300 backdrop-blur-md mb-6"
+          >
+            <Sparkles className="h-4 w-4" />
+            Milestones & Growth
+          </motion.div>
+          <h2 className="text-4xl md:text-6xl font-bold text-white font-display mb-6 tracking-tight">
+            Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Journey</span>
+          </h2>
+          <p className="text-xl text-slate-400 leading-relaxed">
+            A chronicle of my technical evolution, from academic foundations to leading complex digital transformations.
+          </p>
+        </div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/50 via-purple-500/50 to-cyan-500/50 transform md:-translate-x-1/2" />
+        <div className="relative max-w-5xl mx-auto">
+          {/* Animated Scroll Line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 transform md:-translate-x-1/2 overflow-hidden">
+            <motion.div 
+              style={{ scaleY }}
+              className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-cyan-400 via-purple-500 to-transparent origin-top"
+            />
+          </div>
 
-          <div className="space-y-12">
-            {experiences.map((experience, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 top-0 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 border-4 border-indigo-950 flex items-center justify-center transform -translate-x-1/2 z-10 shadow-lg shadow-purple-500/20">
-                  {experience.type === "work" ? (
-                    <Briefcase className="h-3 w-3 text-white" />
-                  ) : experience.type === "education" ? (
-                    <GraduationCap className="h-3 w-3 text-white" />
-                  ) : (
-                    <Award className="h-3 w-3 text-white" />
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className={`md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
-                  <motion.div
-                    className="bg-indigo-900/30 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div
-                        className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                          experience.type === "work"
-                            ? "bg-gradient-to-br from-blue-500/50 to-cyan-500/50 text-white"
-                            : experience.type === "education"
-                              ? "bg-gradient-to-br from-green-500/50 to-teal-500/50 text-white"
-                              : "bg-gradient-to-br from-amber-500/50 to-yellow-500/50 text-white"
-                        }`}
-                      >
-                        {experience.icon}
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg text-white">{experience.title}</h3>
-                        <p className="text-sm text-gray-300">{experience.company}</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-300 mb-3">{experience.description}</p>
-                    <div className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-white">
-                      {experience.date}
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
+          <div className="space-y-24">
+            {experiences.map((exp, index) => (
+              <ExperienceItem key={index} exp={exp} index={index} />
             ))}
           </div>
         </div>
@@ -160,3 +112,79 @@ export default function Experience() {
   )
 }
 
+function ExperienceItem({ exp, index }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: index * 0.1 }}
+      className={`relative flex flex-col md:flex-row items-center ${
+        index % 2 === 0 ? "md:flex-row-reverse" : ""
+      }`}
+    >
+      {/* Timeline Node */}
+      <div className="absolute left-4 md:left-1/2 w-10 h-10 rounded-xl bg-slate-950 border border-white/20 z-10 transform -translate-x-1/2 flex items-center justify-center shadow-2xl transition-colors group-hover:border-cyan-400/50">
+        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 animate-pulse" />
+      </div>
+
+      {/* Date Desktop (Opposite Side) */}
+      <div className={`hidden md:flex w-full md:w-1/2 px-12 items-center ${index % 2 === 0 ? "justify-start" : "justify-end"}`}>
+        <div className="flex items-center gap-3 text-slate-500 font-medium">
+          <Calendar className="h-5 w-5" />
+          <span className="text-lg">{exp.date}</span>
+        </div>
+      </div>
+
+      {/* Card Side */}
+      <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
+        <SpotlightCard className="rounded-[2rem]" spotlightColor={exp.color}>
+          <div className="group relative bg-slate-900/40 backdrop-blur-xl border border-white/5 p-8 rounded-[2rem] hover:border-white/20 transition-all duration-500">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-cyan-400 text-sm font-bold uppercase tracking-wider mb-1">
+                  <MapPin className="h-3 w-3" />
+                  {exp.location}
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors">
+                  {exp.title}
+                </h3>
+                <p className="text-lg text-slate-400 font-medium">{exp.company}</p>
+              </div>
+              <div className="h-14 w-14 rounded-2xl bg-white/5 flex items-center justify-center text-white border border-white/10 group-hover:scale-110 group-hover:bg-cyan-500/10 group-hover:text-cyan-400 transition-all duration-500">
+                {exp.icon}
+              </div>
+            </div>
+
+            {/* Content */}
+            <p className="text-slate-500 leading-relaxed mb-8 text-lg">
+              {exp.description}
+            </p>
+
+            {/* Skills Tags */}
+            <div className="flex flex-wrap gap-2">
+              {exp.skills.map((skill) => (
+                <span 
+                  key={skill} 
+                  className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-slate-400 group-hover:text-cyan-300 transition-colors"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+
+            {/* Mobile Date */}
+            <div className="mt-6 flex md:hidden items-center gap-2 text-slate-500 text-sm font-medium">
+              <Calendar className="h-4 w-4" />
+              {exp.date}
+            </div>
+          </div>
+        </SpotlightCard>
+      </div>
+    </motion.div>
+  )
+}

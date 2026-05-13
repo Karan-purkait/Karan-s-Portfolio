@@ -1,66 +1,62 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react"
+import { ExternalLink, Github, ChevronLeft, ChevronRight, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import SpotlightCard from "@/components/spotlight-card"
 
 const projects = [
   {
-    title: "The CodeBird Official Platform",
-    description:
-      "A dynamic platform showcasing CodeBird’s events, projects, and member achievements with a user-friendly and responsive design." ,
-    image: "/codebird.png?height=600&width=800",
-    tags: ["React", "Node.js", "MongoDB", "Express js","Tailwind CSS"] ,
+    title: "Happy Care",
+    description: "An AI-enabled disease and medicine prediction platform integrated with a comprehensive hospital management system for improved patient care.",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800",
+    tags: ["AI/ML", "React", "Node.js", "Healthcare"],
+    liveLink: "#",
+    githubLink: "#",
+  },
+  {
+    title: "TitanoOS",
+    description: "A comprehensive fleet management and robotics telemetry platform with real-time tracking, historical playback, and automated ingestion jobs.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+    tags: ["Next.js", "AWS S3", "Node.js", "Tailwind"],
+    liveLink: "#",
+    githubLink: "#",
+  },
+  {
+    title: "Martensite Website",
+    description: "A professional and industrial website designed for Martensite, focusing on engineering excellence and material science solutions.",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Framer Motion", "UI/UX"],
+    liveLink: "#",
+    githubLink: "#",
+  },
+  {
+    title: "Banerjee Electronics",
+    description: "The official corporate presence for Banerjee Electronics and Consultancy, showcasing their electronics services and professional consultancy expertise.",
+    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=800",
+    tags: ["Next.js", "React", "Corporate"],
+    liveLink: "#",
+    githubLink: "#",
+  },
+  {
+    title: "BECS Stores",
+    description: "An integrated e-commerce platform for BECS, featuring electronics inventory management and a seamless shopping experience.",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Express", "MongoDB"],
+    liveLink: "#",
+    githubLink: "#",
+  },
+  {
+    title: "The CodeBird Platform",
+    description: "A dynamic platform showcasing CodeBird’s events, projects, and member achievements with a user-friendly and responsive design.",
+    image: "/codebird.png",
+    tags: ["React", "Node.js", "MongoDB", "Tailwind"],
     liveLink: "https://thecodebirdofficial.vercel.app/",
     githubLink: "https://github.com/Karan-purkait/The-CodeBird",
   },
-  
-
-  
-  {
-    title: "My collage Grade Calculator",
-    description: "This web-based College Grade Calculator helps students track and predict their academic performance by allowing them to input assignment scores, category weights, and course credits to calculate course grades and semester GPAs, including what-if scenarios.",
-    image: "/sgpa.png?height=600&width=800",
-    tags: ["React.js", "Tailwind CSS", "Material UI","SEO"],
-    liveLink: "https://uitcgpa-calculator.vercel.app/",
-    githubLink: "https://github.com/Karan-purkait/sgpa-calculator",
-  },
-  {
-    title: "MeetUp",
-    description: "Meetup connects people with shared interests through local events, which can be in-person or online via video conferencing, similar to how Zoom facilitates virtual gatherings.",
-    image: "/meet.png?height=600&width=800",
-    tags: ["React", "Redux", "Express", "Socket.io"],
-    liveLink: "https://meet-up-zeta-two.vercel.app/",
-    githubLink: "https://github.com/Karan-purkait/MeetUp",
-  },
-  // {
-  //   title: "Fitness Tracking App",
-  //   description:
-  //     "A mobile-first fitness tracking application with workout plans, progress tracking, and nutrition logging.",
-  //   image: "/placeholder.svg?height=600&width=800",
-  //   tags: ["React Native", "GraphQL", "MongoDB", "AWS"],
-  //   liveLink: "#",
-  //   githubLink: "#",
-  // },
-  // {
-  //   title: "Real Estate Platform",
-  //   description: "A real estate listing platform with advanced search, filtering, and virtual tours.",
-  //   image: "/placeholder.svg?height=600&width=800",
-  //   tags: ["Vue.js", "Node.js", "PostgreSQL", "Google Maps API"],
-  //   liveLink: "#",
-  //   githubLink: "#",
-  // },
-  // {
-  //   title: "Weather Application",
-  //   description: "A weather forecasting application with location-based services and interactive maps.",
-  //   image: "/placeholder.svg?height=600&width=800",
-  //   tags: ["React", "OpenWeather API", "Leaflet", "Tailwind CSS"],
-  //   liveLink: "#",
-  //   githubLink: "#",
-  // },
 ]
 
 export default function Projects() {
@@ -68,146 +64,143 @@ export default function Projects() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [activeIndex, setActiveIndex] = useState(0)
   const [direction, setDirection] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
 
-  const visibleProjects = projects.slice(activeIndex, activeIndex + 3)
-  const canScrollLeft = activeIndex > 0
-  const canScrollRight = activeIndex + 3 < projects.length
-
-  const handlePrev = () => {
-    if (canScrollLeft) {
-      setDirection(-1)
-      setActiveIndex(activeIndex - 1)
-    }
-  }
-
-  const handleNext = () => {
-    if (canScrollRight) {
-      setDirection(1)
-      setActiveIndex(activeIndex + 1)
-    }
-  }
-
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+  const paginate = (newDirection) => {
+    if (isAnimating) return
+    setIsAnimating(true)
+    setDirection(newDirection)
+    setActiveIndex((prev) => (prev + newDirection + projects.length) % projects.length)
   }
 
   return (
-    <section id="projects" className="py-20 md:py-32 relative">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute bottom-1/3 right-1/3 w-[500px] h-[500px] bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="container mx-auto">
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          transition={{ staggerChildren: 0.1 }}
-          className="text-center mb-16"
-        >
-          <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold mb-4 text-white">
-            My Projects
-          </motion.h2>
+    <section id="projects" className="py-24 md:py-40 relative">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
           <motion.div
-            variants={fadeIn}
-            className="w-20 h-1.5 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto mb-6 rounded-full"
-          />
-          <motion.p variants={fadeIn} className="text-gray-300 max-w-2xl mx-auto">
-            Explore some of my recent work and personal projects
-          </motion.p>
-        </motion.div>
+            ref={ref}
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            className="max-w-2xl"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/5 px-4 py-2 text-sm font-medium text-purple-300 backdrop-blur-md mb-6">
+              <Sparkles className="h-4 w-4" />
+              Selected Works
+            </div>
+            <h2 className="text-4xl md:text-6xl font-bold text-white font-display mb-6">Featured Projects</h2>
+            <p className="text-xl text-slate-400">
+              A gallery of digital experiences built with precision, performance, and purpose.
+            </p>
+          </motion.div>
 
-        <div className="relative">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-hidden">
-            {visibleProjects.map((project, index) => (
-              <motion.div
-                key={`${project.title}-${activeIndex + index}`}
-                initial={{ opacity: 0, x: direction > 0 ? 100 : -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction > 0 ? -100 : 100 }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ y: -10 }}
-                className="group bg-indigo-900/30 backdrop-blur-sm border border-purple-500/20 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    width={800}
-                    height={600}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <div className="flex gap-2">
-                      {project.githubLink && (
-                        <Button
-                          size="icon"
-                          variant="secondary"
-                          asChild
-                          className="rounded-full bg-purple-500/80 hover:bg-purple-500 text-white border-none"
-                        >
-                          <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                            <Github className="h-4 w-4" />
-                          </a>
-                        </Button>
-                      )}
-                      {project.liveLink && (
-                        <Button
-                          size="icon"
-                          variant="secondary"
-                          asChild
-                          className="rounded-full bg-cyan-500/80 hover:bg-cyan-500 text-white border-none"
-                        >
-                          <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="h-4 w-4" />
-                          </a>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
-                  <p className="text-gray-300 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs px-2 py-1 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-white"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="flex gap-4">
+            <Button
+              variant="outline"
+              size="icon"
+              className="rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-white h-14 w-14 backdrop-blur-xl"
+              onClick={() => paginate(-1)}
+              disabled={isAnimating}
+            >
+              <ChevronLeft className="h-7 w-7" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-white h-14 w-14 backdrop-blur-xl"
+              onClick={() => paginate(1)}
+              disabled={isAnimating}
+            >
+              <ChevronRight className="h-7 w-7" />
+            </Button>
           </div>
+        </div>
 
-          <div className="flex justify-center mt-10 gap-4">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handlePrev}
-              disabled={!canScrollLeft}
-              className="rounded-full border-purple-500/30 text-white hover:bg-purple-500/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+        <div className="relative min-h-[500px]">
+          <AnimatePresence 
+            mode="wait" 
+            custom={direction}
+            onExitComplete={() => setIsAnimating(false)}
+          >
+            <motion.div
+              key={activeIndex}
+              custom={direction}
+              initial={{ opacity: 0, x: direction > 0 ? 100 : -100, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: direction > 0 ? -100 : 100, scale: 0.9 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="grid lg:grid-cols-2 gap-12 items-center"
             >
-              <ChevronLeft className="h-5 w-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handleNext}
-              disabled={!canScrollRight}
-              className="rounded-full border-purple-500/30 text-white hover:bg-purple-500/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
+              <div className="relative group">
+                <SpotlightCard className="rounded-[2.5rem]" spotlightColor="rgba(34, 211, 238, 0.3)">
+                  <div className="relative aspect-video w-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
+                    <Image
+                      src={projects[activeIndex].image}
+                      alt={projects[activeIndex].title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
+                  </div>
+                </SpotlightCard>
+              </div>
+
+              <div className="space-y-8">
+                <div className="flex flex-wrap gap-2">
+                  {projects[activeIndex].tags.map((tag) => (
+                    <span key={tag} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-cyan-300 backdrop-blur-md">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="space-y-4">
+                  <h3 className="text-4xl md:text-5xl font-bold text-white font-display leading-tight">
+                    {projects[activeIndex].title}
+                  </h3>
+                  <p className="text-lg md:text-xl text-slate-400 leading-relaxed">
+                    {projects[activeIndex].description}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-4 pt-4">
+                  {projects[activeIndex].liveLink !== "#" && (
+                    <Button size="lg" className="rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8" asChild>
+                      <a href={projects[activeIndex].liveLink} target="_blank" rel="noopener noreferrer">
+                        View Live Site <ExternalLink className="ml-2 h-5 w-5" />
+                      </a>
+                    </Button>
+                  )}
+                  {projects[activeIndex].githubLink !== "#" && (
+                    <Button size="lg" variant="outline" className="rounded-full border-white/10 bg-white/5 text-white hover:bg-white/10 px-8" asChild>
+                      <a href={projects[activeIndex].githubLink} target="_blank" rel="noopener noreferrer">
+                        Source Code <Github className="ml-2 h-5 w-5" />
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Progress Indicator */}
+          <div className="absolute -bottom-16 left-0 right-0 flex justify-center gap-3">
+            {projects.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  if (isAnimating) return
+                  setDirection(i > activeIndex ? 1 : -1)
+                  setActiveIndex(i)
+                }}
+                className={`h-2 transition-all duration-500 rounded-full ${
+                  activeIndex === i ? "w-12 bg-cyan-400" : "w-3 bg-white/10 hover:bg-white/20"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
     </section>
   )
-} 
-
+}
