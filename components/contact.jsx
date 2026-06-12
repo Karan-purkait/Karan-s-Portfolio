@@ -91,7 +91,7 @@ export default function Contact() {
         <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-full blur-[120px]" />
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
           initial="hidden"
@@ -99,7 +99,7 @@ export default function Contact() {
           transition={{ staggerChildren: 0.1 }}
           className="text-center mb-16"
         >
-          <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold mb-4 text-white">
+          <motion.h2 variants={fadeIn} className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white">
             Get In Touch
           </motion.h2>
           <motion.div
@@ -135,7 +135,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-medium text-white">Location</h4>
-                  <p className="text-gray-300">Hooghly,712403,West Bengal</p>
+                  <p className="text-gray-300">Hooghly, 712403, West Bengal</p>
                 </div>
               </motion.div>
 

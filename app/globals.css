@@ -108,6 +108,10 @@ body {
     scroll-behavior: smooth;
   }
 
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
   ::selection {
     background: rgba(34, 211, 238, 0.35);
     color: #f8fafc;

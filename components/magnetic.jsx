@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
 
-export default function Magnetic({ children, strength = 0.5 }) {
+export default function Magnetic({ children, strength = 0.5, className = "" }) {
   const ref = useRef(null)
   
   const x = useMotionValue(0)
@@ -34,6 +34,7 @@ export default function Magnetic({ children, strength = 0.5 }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ x: quickX, y: quickY }}
+      className={className}
     >
       {children}
     </motion.div>

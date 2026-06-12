@@ -57,6 +57,78 @@ const projects = [
     liveLink: "https://thecodebirdofficial.vercel.app/",
     githubLink: "https://github.com/Karan-purkait/The-CodeBird",
   },
+  {
+    title: "Medicine-Ecom",
+    description: "A digital pharmacy and medicine e-commerce solution offering healthcare shopping catalog, checkout integrations, and prescription services.",
+    image: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Node.js", "MongoDB", "E-Commerce"],
+    liveLink: "https://medicine-ecom.vercel.app",
+    githubLink: "#",
+  },
+  {
+    title: "TrustKart",
+    description: "A robust retail shopping cart platform designed with responsive product filters, search interfaces, and secure checkout simulation workflows.",
+    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=800",
+    tags: ["Next.js", "Tailwind CSS", "Redux", "E-Commerce"],
+    liveLink: "https://trust-kart-two.vercel.app?_vercel_share=hP2Y1pEJJ47X3sSWSkicaeAMNDoRz51x",
+    githubLink: "#",
+  },
+  {
+    title: "BrightNova Institute",
+    description: "An interactive learning management system presenting class catalogs, course admissions portals, and educator listings.",
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Tailwind", "Education", "Web App"],
+    liveLink: "https://bright-nova-institute.vercel.app",
+    githubLink: "#",
+  },
+  {
+    title: "FlowMind",
+    description: "A graphical mind mapping dashboard designed for brainstorming structures, scheduling workflows, and maximizing team productivity.",
+    image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Framer Motion", "Tailwind", "Productivity"],
+    liveLink: "https://flow-mind.vercel.app",
+    githubLink: "#",
+  },
+  {
+    title: "LuxeState",
+    description: "A modern property search platform featuring high-resolution galleries of luxury houses, map pins, and agent contact filters.",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Node.js", "Real Estate", "Tailwind"],
+    liveLink: "https://luxe-state-iota.vercel.app",
+    githubLink: "#",
+  },
+  {
+    title: "Medicare Plus",
+    description: "A premium clinical landing portal facilitating digital appointments booking, expert consulting directories, and profile tracking.",
+    image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Tailwind CSS", "Healthcare", "UX/UI"],
+    liveLink: "https://medi-care-plus-fawn.vercel.app",
+    githubLink: "#",
+  },
+  {
+    title: "Vertex Elevators",
+    description: "An elegant industrial catalog and booking service showcasing commercial elevators systems, escalator mechanics, and maintenance certifications.",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Framer Motion", "Tailwind", "Industrial"],
+    liveLink: "https://vertex-elevetors.vercel.app",
+    githubLink: "#",
+  },
+  {
+    title: "Lumiere Restaurant",
+    description: "A gourmet restaurant portal highlighting daily specials menus, reservation management tables, and master chef blogs.",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800",
+    tags: ["Next.js", "Tailwind", "Food Tech", "MongoDB"],
+    liveLink: "https://lumiere-resturent.vercel.app",
+    githubLink: "#",
+  },
+  {
+    title: "Titan Gym",
+    description: "An dynamic workout center and membership management platform showcasing trainers biographies, slot selections, and pricing cards.",
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800",
+    tags: ["React", "Tailwind CSS", "Fitness", "Responsive"],
+    liveLink: "https://titan-gym-eight.vercel.app",
+    githubLink: "#",
+  },
 ]
 
 export default function Projects() {
@@ -87,7 +159,7 @@ export default function Projects() {
               <Sparkles className="h-4 w-4" />
               Selected Works
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-white font-display mb-6">Featured Projects</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white font-display mb-6">Featured Projects</h2>
             <p className="text-xl text-slate-400">
               A gallery of digital experiences built with precision, performance, and purpose.
             </p>
@@ -155,7 +227,7 @@ export default function Projects() {
                 </div>
                 
                 <div className="space-y-4">
-                  <h3 className="text-4xl md:text-5xl font-bold text-white font-display leading-tight">
+                  <h3 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-display leading-tight">
                     {projects[activeIndex].title}
                   </h3>
                   <p className="text-lg md:text-xl text-slate-400 leading-relaxed">
@@ -164,18 +236,26 @@ export default function Projects() {
                 </div>
 
                 <div className="flex flex-wrap gap-4 pt-4">
-                  {projects[activeIndex].liveLink !== "#" && (
+                  {projects[activeIndex].liveLink !== "#" ? (
                     <Button size="lg" className="rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8" asChild>
                       <a href={projects[activeIndex].liveLink} target="_blank" rel="noopener noreferrer">
                         View Live Site <ExternalLink className="ml-2 h-5 w-5" />
                       </a>
                     </Button>
+                  ) : (
+                    <Button size="lg" className="rounded-full bg-slate-800/80 text-slate-500 font-bold px-8 cursor-not-allowed opacity-60" disabled>
+                      Live Site Unavailable
+                    </Button>
                   )}
-                  {projects[activeIndex].githubLink !== "#" && (
+                  {projects[activeIndex].githubLink !== "#" ? (
                     <Button size="lg" variant="outline" className="rounded-full border-white/10 bg-white/5 text-white hover:bg-white/10 px-8" asChild>
                       <a href={projects[activeIndex].githubLink} target="_blank" rel="noopener noreferrer">
                         Source Code <Github className="ml-2 h-5 w-5" />
                       </a>
+                    </Button>
+                  ) : (
+                    <Button size="lg" variant="outline" className="rounded-full border-white/5 bg-white/5 text-slate-500 px-8 cursor-not-allowed opacity-50" disabled>
+                      Private Source
                     </Button>
                   )}
                 </div>

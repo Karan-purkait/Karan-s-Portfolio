@@ -69,7 +69,7 @@ export default function Skills() {
               <Sparkles className="h-4 w-4" />
               Technical Prowess
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-white font-display mb-6">Skills & Technologies</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white font-display mb-6">Skills & Technologies</h2>
             <p className="text-xl text-slate-400">
               A comprehensive stack designed for building scalable, high-performance digital products.
             </p>

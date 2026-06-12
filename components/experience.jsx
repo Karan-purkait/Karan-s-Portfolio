@@ -84,7 +84,7 @@ export default function Experience() {
             <Sparkles className="h-4 w-4" />
             Milestones & Growth
           </motion.div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white font-display mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white font-display mb-6 tracking-tight">
             Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Journey</span>
           </h2>
           <p className="text-xl text-slate-400 leading-relaxed">
@@ -140,7 +140,7 @@ function ExperienceItem({ exp, index }) {
       </div>
 
       {/* Card Side */}
-      <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
+      <div className={`w-full md:w-1/2 pl-12 ${index % 2 === 0 ? "md:pl-0 md:pr-12" : "md:pl-12 md:pr-0"}`}>
         <SpotlightCard className="rounded-[2rem]" spotlightColor={exp.color}>
           <div className="group relative bg-slate-900/40 backdrop-blur-xl border border-white/5 p-8 rounded-[2rem] hover:border-white/20 transition-all duration-500">
             {/* Header */}

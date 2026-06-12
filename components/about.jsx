@@ -68,7 +68,7 @@ export default function About() {
               <motion.div 
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-10 right-10 z-20 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 p-4 shadow-xl"
+                className="absolute top-4 right-4 xs:top-10 xs:right-10 z-20 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 p-4 shadow-xl"
                 style={{ transform: "translateZ(40px)" }}
               >
                 <div className="text-center">
@@ -95,7 +95,7 @@ export default function About() {
                 <Sparkles className="h-4 w-4" />
                 The Story Behind
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white font-display leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-display leading-tight">
                 Engineering <span className="text-cyan-400">Excellence</span> with a Creative Mindset.
               </h2>
               <p className="text-lg text-slate-400 leading-relaxed">
