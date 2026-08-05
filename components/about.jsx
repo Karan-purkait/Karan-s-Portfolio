@@ -3,7 +3,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { Code, Briefcase, GraduationCap, Heart, Sparkles } from "lucide-react"
+import { Sparkles, Code, Users, Award, BookOpen } from "lucide-react"
 import Image from "next/image"
 import SpotlightCard from "@/components/spotlight-card"
 
@@ -16,10 +16,12 @@ export default function About() {
   const y = useMotionValue(0)
   const mouseXSpring = useSpring(x)
   const mouseYSpring = useSpring(y)
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"])
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"])
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"])
 
   const handleMouseMove = (e) => {
+    // Disable 3D tilt interaction on touch devices (coarse pointers)
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return
     const rect = e.currentTarget.getBoundingClientRect()
     x.set(e.clientX / rect.width - 0.5)
     y.set(e.clientY / rect.height - 0.5)
@@ -30,24 +32,49 @@ export default function About() {
     y.set(0)
   }
 
-  const features = [
-    { icon: <Code />, title: "Development", desc: "Full-Stack Specialist", color: "rgba(34, 211, 238, 0.2)" },
-    { icon: <Briefcase />, title: "Experience", desc: "1+ Year in Tech", color: "rgba(139, 92, 246, 0.2)" },
-    { icon: <GraduationCap />, title: "Education", desc: "Computer Science", color: "rgba(245, 158, 11, 0.2)" },
-    { icon: <Heart />, title: "Passion", desc: "Clean UI & Logic", color: "rgba(239, 68, 68, 0.2)" },
+  const metrics = [
+    { 
+      icon: <Code className="h-5 w-5 text-[#4F73D9]" />, 
+      value: "15+", 
+      label: "Projects Built", 
+      desc: "Web apps, tools, and platforms.",
+      color: "rgba(79, 115, 217, 0.04)" 
+    },
+    { 
+      icon: <Users className="h-5 w-5 text-[#4F73D9]" />, 
+      value: "20+", 
+      label: "Clients Acquired", 
+      desc: "BD pipelines and campaigns.",
+      color: "rgba(79, 115, 217, 0.04)" 
+    },
+    { 
+      icon: <Award className="h-5 w-5 text-[#4F73D9]" />, 
+      value: "25+", 
+      label: "Skills Mastered", 
+      desc: "Tech and growth capabilities.",
+      color: "rgba(79, 115, 217, 0.04)" 
+    },
+    { 
+      icon: <BookOpen className="h-5 w-5 text-[#4F73D9]" />, 
+      value: "1+", 
+      label: "Year Exp", 
+      desc: "In full-stack dev and business.",
+      color: "rgba(79, 115, 217, 0.04)" 
+    },
   ]
 
   return (
-    <section id="about" className="py-24 md:py-40 relative overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px] -translate-y-1/2" />
+    <section id="about" className="py-24 md:py-32 relative overflow-hidden bg-white border-y border-slate-100">
+      {/* Decorative Blob */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-500/[0.02] rounded-full blur-[100px] -translate-y-1/2" />
       </div>
 
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Image Column */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             onMouseMove={handleMouseMove}
@@ -55,88 +82,92 @@ export default function About() {
             style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
             className="relative group cursor-none"
           >
-            <div className="relative aspect-[4/5] md:aspect-square w-full max-w-[500px] mx-auto rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10" />
+            <div className="relative aspect-[4/5] md:aspect-square w-full max-w-[480px] mx-auto rounded-[2.5rem] overflow-hidden border border-black/[0.06] shadow-xl bg-slate-50">
               <Image
                 src="/abt.jpg"
-                alt="About Me"
+                alt="About Karan Purkait"
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
               
-              {/* Floating Badge */}
+              {/* Floating glassmorphic counter on the image */}
               <motion.div 
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-4 right-4 xs:top-10 xs:right-10 z-20 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 p-4 shadow-xl"
-                style={{ transform: "translateZ(40px)" }}
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-6 right-6 z-20 rounded-2xl bg-white/95 border border-black/[0.06] p-4 shadow-lg backdrop-blur-md"
+                style={{ transform: "translateZ(30px)" }}
               >
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-white">1+</div>
-                  <div className="text-[10px] uppercase tracking-wider text-cyan-300">Year Exp</div>
+                  <div className="text-3xl font-extrabold text-[#4F73D9]">100%</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Dedication</div>
                 </div>
               </motion.div>
             </div>
             
             {/* Background Glow */}
-            <div className="absolute inset-0 bg-cyan-500/20 blur-[100px] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-blue-500/10 blur-[60px] md:blur-[80px] -z-10 opacity-60 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
           </motion.div>
 
-          {/* Text Column */}
+          {/* Text & Metrics Column */}
           <motion.div
             ref={ref}
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-10"
+            className="space-y-8"
           >
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-2 text-sm font-medium text-cyan-300 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/50 px-4 py-2 text-sm font-semibold text-[#4F73D9] backdrop-blur-md shadow-sm">
                 <Sparkles className="h-4 w-4" />
-                The Story Behind
+                The Mindset
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-display leading-tight">
-                Engineering <span className="text-cyan-400">Excellence</span> with a Creative Mindset.
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display leading-tight">
+                Bridging Business <span className="text-[#4F73D9]">Strategy</span> with Technical Execution.
               </h2>
-              <p className="text-lg text-slate-400 leading-relaxed">
-                I'm a full-stack developer dedicated to building high-performance, polished digital products. I don't just write code; I craft experiences that are intuitive, scalable, and visually compelling.
+              <p className="text-lg text-slate-600 leading-relaxed font-medium">
+                I help startups and businesses scale. As a developer, I understand the building blocks of technology. As a Business Development Associate and Marketing Lead, I know how to sell it, scale it, and establish strong market-fit.
               </p>
-              <p className="text-slate-400 leading-relaxed">
-                My approach combines rigorous engineering principles with a deep understanding of modern UI/UX trends. Whether it's a complex backend system or a pixel-perfect frontend, I strive for perfection in every commit.
+              <p className="text-slate-650 leading-relaxed">
+                Whether deploying code structures or running marketing campaigns, I strive for high performance and concrete results. I turn technical platforms into active revenue channels.
               </p>
             </div>
 
+            {/* Metrics Grid */}
             <motion.div 
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               variants={{
                 hidden: { opacity: 0 },
                 visible: {
                   opacity: 1,
-                  transition: { staggerChildren: 0.1, delayChildren: 0.3 }
+                  transition: { staggerChildren: 0.08, delayChildren: 0.2 }
                 }
               }}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {features.map((item, i) => (
+              {metrics.map((metric, i) => (
                 <motion.div
                   key={i}
                   variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                    hidden: { opacity: 0, y: 15 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
                   }}
                 >
                   <SpotlightCard 
-                    className="rounded-2xl h-full" 
-                    spotlightColor={item.color}
+                    className="rounded-2xl h-full border border-black/[0.05] bg-slate-50 hover:bg-white transition-all duration-300 shadow-sm hover:shadow-md" 
+                    spotlightColor={metric.color}
                   >
-                    <div className="p-6 bg-slate-900/40 border border-white/5 rounded-2xl group-hover:border-white/10 transition-colors h-full">
-                      <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-500">
-                        {item.icon}
+                    <div className="p-5 flex flex-col justify-between h-full">
+                      <div>
+                        <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center border border-black/[0.05] mb-3 group-hover:scale-105 transition-transform duration-300">
+                          {metric.icon}
+                        </div>
+                        <h4 className="text-2xl font-black text-slate-900 leading-none mb-1">{metric.value}</h4>
+                        <div className="text-sm font-bold text-slate-800 mb-1">{metric.label}</div>
                       </div>
-                      <h4 className="text-lg font-bold text-white mb-1">{item.title}</h4>
-                      <p className="text-sm text-slate-500">{item.desc}</p>
+                      <p className="text-xs text-slate-500 leading-normal">{metric.desc}</p>
                     </div>
                   </SpotlightCard>
                 </motion.div>

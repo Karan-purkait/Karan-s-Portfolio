@@ -39,7 +39,7 @@ export default function AnimatedBackground() {
     }
 
     const getParticleColor = (hue) => {
-      const baseColor = theme === "dark" ? `hsla(${hue}, 80%, 70%, 0.6)` : `hsla(${hue}, 80%, 60%, 0.4)`
+      const baseColor = `hsla(${hue}, 60%, 70%, 0.12)`
       return baseColor
     }
 
@@ -93,15 +93,8 @@ export default function AnimatedBackground() {
               ctx.beginPath()
               const gradient = ctx.createLinearGradient(particle.x, particle.y, otherParticle.x, otherParticle.y)
 
-              const startColor =
-                theme === "dark"
-                  ? `hsla(${(hue + i) % 360}, 80%, 70%, ${0.2 * (1 - distance / maxDistance)})`
-                  : `hsla(${(hue + i) % 360}, 80%, 60%, ${0.15 * (1 - distance / maxDistance)})`
-
-              const endColor =
-                theme === "dark"
-                  ? `hsla(${(hue + j) % 360}, 80%, 70%, ${0.2 * (1 - distance / maxDistance)})`
-                  : `hsla(${(hue + j) % 360}, 80%, 60%, ${0.15 * (1 - distance / maxDistance)})`
+              const startColor = `hsla(${(hue + i) % 360}, 60%, 70%, ${0.05 * (1 - distance / maxDistance)})`
+              const endColor = `hsla(${(hue + j) % 360}, 60%, 70%, ${0.05 * (1 - distance / maxDistance)})`
 
               gradient.addColorStop(0, startColor)
               gradient.addColorStop(1, endColor)

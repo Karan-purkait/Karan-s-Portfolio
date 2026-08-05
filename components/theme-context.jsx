@@ -4,13 +4,13 @@ import { createContext, useContext, useEffect, useState } from "react"
 
 // Create context
 const ThemeContext = createContext({
-  theme: "dark",
+  theme: "light",
   setTheme: () => null,
 })
 
 // Theme provider component
 export function CustomThemeProvider({ children }) {
-  const [theme, setTheme] = useState("dark")
+  const [theme, setTheme] = useState("light")
 
   // Initialize theme from localStorage or system preference
   useEffect(() => {

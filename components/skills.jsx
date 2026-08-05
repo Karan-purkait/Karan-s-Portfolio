@@ -3,51 +3,45 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { Braces, Cpu, Database, Figma, Layout, Server, Sparkles, Terminal, Zap } from "lucide-react"
+import { Sparkles, Terminal, Code2, TrendingUp, Users2, Figma, Compass } from "lucide-react"
 import SpotlightCard from "@/components/spotlight-card"
 
 const skills = [
   {
-    category: "Frontend Development",
-    icon: <Layout className="h-6 w-6" />,
-    color: "from-cyan-400 to-sky-500",
-    glow: "rgba(34, 211, 238, 0.2)",
-    items: ["React.js", "Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
-  },
-  {
-    category: "Backend & Cloud",
-    icon: <Server className="h-6 w-6" />,
-    color: "from-purple-500 to-indigo-600",
-    glow: "rgba(168, 85, 247, 0.2)",
-    items: ["Node.js", "Express.js", "MongoDB", "AWS S3", "REST APIs"],
-  },
-  {
-    category: "Languages & Core",
-    icon: <Braces className="h-6 w-6" />,
-    color: "from-amber-400 to-orange-500",
-    glow: "rgba(251, 191, 36, 0.2)",
-    items: ["JavaScript", "C / C++", "Python", "Data Structures", "Algorithms"],
+    category: "Technical Development",
+    icon: <Code2 className="h-5 w-5 text-[#D4F700]" />,
+    color: "bg-white/10 border-white/20",
+    items: ["React.js", "Next.js", "Java", "Node.js", "Express.js", "REST APIs", "Tailwind CSS", "TypeScript"],
   },
   {
     category: "DevOps & Tools",
-    icon: <Terminal className="h-6 w-6" />,
-    color: "from-emerald-400 to-teal-500",
-    glow: "rgba(16, 185, 129, 0.2)",
-    items: ["Git / GitHub", "Docker", "CI/CD", "Postman", "Vercel / Netlify"],
+    icon: <Terminal className="h-5 w-5 text-[#D4F700]" />,
+    color: "bg-white/10 border-white/20",
+    items: ["Git / GitHub", "Docker", "DevOps basics", "AWS S3", "CI/CD", "Postman", "Vercel / Netlify"],
   },
   {
-    category: "UI/UX Design",
-    icon: <Figma className="h-6 w-6" />,
-    color: "from-pink-500 to-rose-500",
-    glow: "rgba(244, 63, 94, 0.2)",
-    items: ["Figma", "Responsive Design", "Typography", "Prototyping", "Design Systems"],
+    category: "Business Development",
+    icon: <Users2 className="h-5 w-5 text-[#D4F700]" />,
+    color: "bg-white/10 border-white/20",
+    items: ["Lead Generation", "Client Acquisition", "Sales Strategy", "CRM Management", "Deal Closing", "Negotiation"],
   },
   {
-    category: "Soft Skills",
-    icon: <Zap className="h-6 w-6" />,
-    color: "from-blue-500 to-cyan-500",
-    glow: "rgba(59, 130, 246, 0.2)",
-    items: ["Team Leadership", "Agile / Scrum", "Communication", "Problem Solving", "Adaptability"],
+    category: "Marketing & Growth",
+    icon: <TrendingUp className="h-5 w-5 text-[#D4F700]" />,
+    color: "bg-white/10 border-white/20",
+    items: ["Digital Marketing", "SEO Strategy", "Social Media Ads", "Lead Nurturing", "Email Marketing", "Brand Growth"],
+  },
+  {
+    category: "Design & UX",
+    icon: <Figma className="h-5 w-5 text-[#D4F700]" />,
+    color: "bg-white/10 border-white/20",
+    items: ["Figma", "Responsive Web Design", "Typography", "Interactive Prototyping", "Design Systems"],
+  },
+  {
+    category: "Core Languages & Data",
+    icon: <Compass className="h-5 w-5 text-[#D4F700]" />,
+    color: "bg-white/10 border-white/20",
+    items: ["Java Core", "C / C++", "Python", "Data Structures", "Algorithms", "SQL / MongoDB"],
   },
 ]
 
@@ -56,33 +50,40 @@ export default function Skills() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="skills" className="py-24 md:py-40 relative">
+    <section id="skills" className="py-24 md:py-32 relative bg-[#4F73D9] text-white border-y border-white/10">
+      {/* Decorative Blob */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-white/[0.02] rounded-full blur-[90px]" />
+      </div>
+
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <motion.div
             ref={ref}
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-4 py-2 text-sm font-medium text-cyan-300 backdrop-blur-md mb-6">
-              <Sparkles className="h-4 w-4" />
-              Technical Prowess
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-[#D4F700] backdrop-blur-md shadow-sm mb-6">
+              <Sparkles className="h-4 w-4 text-[#D4F700]" />
+              Capabilities
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white font-display mb-6">Skills & Technologies</h2>
-            <p className="text-xl text-slate-400">
-              A comprehensive stack designed for building scalable, high-performance digital products.
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white font-display mb-4">
+              Skills & Tech Stack
+            </h2>
+            <p className="text-lg text-blue-100 font-medium">
+              Bridging engineering capabilities and marketing tools to form a comprehensive growth stack.
             </p>
           </motion.div>
         </div>
 
         <motion.div 
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           variants={{
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+              transition: { staggerChildren: 0.08, delayChildren: 0.1 }
             }
           }}
           initial="hidden"
@@ -93,26 +94,29 @@ export default function Skills() {
             <motion.div
               key={skill.category}
               variants={{
-                hidden: { opacity: 0, y: 40, rotate: -1 },
+                hidden: { opacity: 0, y: 30 },
                 visible: { 
                   opacity: 1, 
                   y: 0, 
-                  rotate: 0,
-                  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+                  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
                 }
               }}
+              className="h-full"
             >
-              <SpotlightCard className="h-full rounded-[2.5rem]" spotlightColor={skill.glow}>
-                <div className="group h-full bg-slate-900/40 backdrop-blur-xl border border-white/5 p-8 rounded-[2.5rem] hover:border-white/10 transition-all duration-500">
-                  <div className={`mb-8 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${skill.color} text-slate-950 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}>
-                    {skill.icon}
+              <SpotlightCard className="h-full rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 shadow-md backdrop-blur-sm" spotlightColor="rgba(255, 255, 255, 0.05)">
+                <div className="p-6 flex flex-col h-full justify-between">
+                  <div>
+                    <div className={`mb-5 inline-flex h-10 w-10 items-center justify-center rounded-xl ${skill.color} border shadow-sm bg-white/10`}>
+                      {skill.icon}
+                    </div>
+                    <h3 className="mb-4 text-xl font-bold text-white">{skill.category}</h3>
                   </div>
-                  <h3 className="mb-6 text-2xl font-bold text-white">{skill.category}</h3>
-                  <div className="flex flex-wrap gap-2">
+                  
+                  <div className="flex flex-wrap gap-1.5 pt-2">
                     {skill.items.map((item) => (
                       <span
                         key={item}
-                        className="rounded-lg bg-white/5 border border-white/5 px-3 py-1.5 text-sm font-medium text-slate-400 transition-colors group-hover:text-white group-hover:border-white/10"
+                        className="rounded-lg bg-white/10 border border-white/10 px-3 py-1.5 text-xs font-semibold text-[#D4F700]"
                       >
                         {item}
                       </span>
