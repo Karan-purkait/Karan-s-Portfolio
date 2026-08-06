@@ -75,9 +75,8 @@ export default function Navbar() {
   const scrollToSection = (e, sectionId) => {
     e.preventDefault()
     
-    // Unlock body overflow synchronously to prevent scroll block on mobile
+    // Unlock body overflow synchronously so that the window can scroll on mobile
     document.body.style.overflow = "unset"
-    setMobileMenuOpen(false)
 
     const element = document.getElementById(sectionId)
 
@@ -85,18 +84,26 @@ export default function Navbar() {
       ignoresScroll.current = true;
       setActiveSection(sectionId);
       
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80
+      // Get cross-browser current scroll position
+      const currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop
+      const offsetTop = element.getBoundingClientRect().top + currentScroll - 80
       
+      // Close the menu to trigger state transition
+      setMobileMenuOpen(false)
+
+      // Delay scroll slightly to allow the browser to register overflow: unset and flush layout updates
       setTimeout(() => {
         window.scrollTo({
           top: offsetTop,
           behavior: "smooth",
         })
-      }, 20)
+      }, 150)
 
       setTimeout(() => {
         ignoresScroll.current = false;
       }, 1000)
+    } else {
+      setMobileMenuOpen(false)
     }
   }
 
@@ -105,7 +112,7 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || mobileMenuOpen
           ? "py-3 bg-white/80 backdrop-blur-md border-b border-black/[0.06] shadow-[0_4px_20px_rgba(0,0,0,0.03)] text-slate-900"
           : "py-6 bg-transparent text-white"
         }`}
@@ -118,7 +125,7 @@ export default function Navbar() {
             className="group flex items-center gap-2 font-display text-lg sm:text-2xl font-bold tracking-tight"
           >
             <div className={`flex h-10 w-10 items-center justify-center rounded-xl font-extrabold shadow-md transition-all duration-500 group-hover:rotate-12 ${
-              isScrolled 
+              isScrolled || mobileMenuOpen
                 ? "bg-[#4F73D9] text-white" 
                 : "bg-white text-[#4F73D9]"
             }`}>
@@ -162,7 +169,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Button
               className={`hidden sm:flex rounded-full px-6 font-semibold shadow-sm transition-all duration-350 ${
-                isScrolled 
+                isScrolled || mobileMenuOpen
                   ? "bg-[#4F73D9] text-white hover:bg-[#3D5DB3]" 
                   : "bg-[#D4F700] text-slate-950 hover:bg-[#c2e300]"
               }`}
@@ -175,7 +182,7 @@ export default function Navbar() {
               variant="ghost"
               size="icon"
               className={`md:hidden rounded-full ${
-                isScrolled 
+                isScrolled || mobileMenuOpen
                   ? "text-slate-900 hover:bg-slate-100" 
                   : "text-white hover:bg-white/10"
               }`}
@@ -190,34 +197,49 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "circOut" }}
-            className="absolute top-full left-0 right-0 border-t border-black/[0.06] bg-white/95 backdrop-blur-2xl md:hidden overflow-hidden shadow-lg"
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="absolute top-full left-4 right-4 mt-2 border border-slate-100 bg-white/95 backdrop-blur-2xl md:hidden overflow-hidden rounded-3xl shadow-xl z-50 text-slate-900"
           >
-            <div className="flex flex-col p-6 gap-2">
+            <div className="flex flex-col p-5 gap-1.5">
               {navItems.map((item, idx) => (
                 <motion.div
                   key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
+                  transition={{ delay: idx * 0.04 }}
                 >
                   <Link
                     href={item.href}
                     onClick={(e) => scrollToSection(e, item.href.substring(1))}
-                    className={`flex items-center justify-between p-4 rounded-2xl transition-all duration-300 ${
+                    className={`flex items-center justify-between px-5 py-3.5 rounded-2xl border transition-all duration-300 ${
                       activeSection === item.href.substring(1)
-                        ? "bg-blue-50 border border-blue-100 text-[#4F73D9]"
-                        : "text-slate-650 hover:bg-slate-50 hover:text-slate-900"
+                        ? "bg-blue-50/80 border-blue-100/50 text-[#4F73D9] shadow-sm"
+                        : "border-transparent text-slate-600 hover:bg-slate-50/80 hover:text-slate-900"
                     }`}
                   >
-                    <span className="text-lg font-semibold">{item.name}</span>
-                    <ChevronRight className={`h-5 w-5 transition-transform ${activeSection === item.href.substring(1) ? "translate-x-0" : "-translate-x-2 opacity-0"}`} />
+                    <span className="text-base font-semibold">{item.name}</span>
+                    <ChevronRight className={`h-4 w-4 transition-all duration-300 ${activeSection === item.href.substring(1) ? "translate-x-0 opacity-100 text-[#4F73D9]" : "-translate-x-2 opacity-0 text-slate-400"}`} />
                   </Link>
                 </motion.div>
               ))}
+              
+              {/* Mobile Hire Me Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navItems.length * 0.04 }}
+                className="pt-2"
+              >
+                <Button
+                  className="w-full rounded-2xl py-6 font-semibold shadow-sm bg-[#4F73D9] text-white hover:bg-[#3D5DB3]"
+                  onClick={(e) => scrollToSection(e, "contact")}
+                >
+                  Hire Me
+                </Button>
+              </motion.div>
             </div>
           </motion.div>
         )}
