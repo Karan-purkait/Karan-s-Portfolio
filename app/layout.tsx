@@ -14,8 +14,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Karan Purkait | Business Development, Marketing & Dev",
-  description: "Portfolio of Karan Purkait - Business Development Associate, Marketing Lead, and Full-Stack Developer.",
+  title: "Karan Purkait | Full-Stack Developer",
+  description: "Portfolio of Karan Purkait - Full-Stack Developer and Software Engineer.",
 }
 
 export default function RootLayout({
