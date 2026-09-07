@@ -177,6 +177,7 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/karan-purkait"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Karan Purkait's LinkedIn Profile"
                   whileHover={{ y: -3, scale: 1.05 }}
                   className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white hover:text-slate-950 hover:bg-[#D4F700] hover:border-[#D4F700] transition-colors shadow-sm"
                 >
@@ -186,6 +187,7 @@ export default function Contact() {
                   href="https://github.com/Karan-purkait"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Karan Purkait's GitHub Profile"
                   whileHover={{ y: -3, scale: 1.05 }}
                   className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white hover:text-slate-950 hover:bg-[#D4F700] hover:border-[#D4F700] transition-colors shadow-sm"
                 >

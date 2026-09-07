@@ -181,6 +181,7 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="icon"
+              aria-label="Toggle navigation menu"
               className={`md:hidden rounded-full ${
                 isScrolled || mobileMenuOpen
                   ? "text-slate-900 hover:bg-slate-100" 

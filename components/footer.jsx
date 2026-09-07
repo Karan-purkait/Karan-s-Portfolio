@@ -60,6 +60,7 @@ export default function Footer() {
               onClick={scrollToTop}
               className="h-9 w-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-700 hover:text-[#4F73D9] hover:bg-slate-100 transition-all shadow-sm"
               title="Back to Top"
+              aria-label="Back to Top"
             >
               <ArrowUp className="h-4 w-4" />
             </button>

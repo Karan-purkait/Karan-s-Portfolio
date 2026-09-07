@@ -266,7 +266,7 @@ export default function Projects() {
                     <div className="relative aspect-video w-full overflow-hidden bg-slate-100">
                       <Image
                         src={project.image}
-                        alt={project.title}
+                        alt={`${project.title} - Project by Karan Purkait`}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 33vw"

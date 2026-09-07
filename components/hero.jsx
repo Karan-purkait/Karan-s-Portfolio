@@ -170,7 +170,7 @@ export default function Hero() {
                 <div className="relative h-64 w-64 xs:h-80 xs:w-80 sm:h-96 sm:w-96 md:h-[450px] md:w-[450px] rounded-full overflow-hidden border-4 border-white/30 shadow-[0_30px_100px_rgba(0,0,0,0.3)] bg-slate-950">
                   <Image
                     src="/mypic.jpeg"
-                    alt="Karan Purkait"
+                    alt="Karan Purkait - Full-Stack Developer, Marketing Lead, and Software Engineer"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     priority

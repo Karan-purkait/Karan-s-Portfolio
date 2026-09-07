@@ -85,7 +85,7 @@ export default function About() {
             <div className="relative aspect-square sm:aspect-[4/5] md:aspect-square w-full max-w-[440px] lg:max-w-[480px] mx-auto rounded-3xl sm:rounded-[2.5rem] overflow-hidden border border-black/[0.06] shadow-xl bg-slate-50">
               <Image
                 src="/abt.jpg"
-                alt="About Karan Purkait"
+                alt="Karan Purkait - About Me, Education, and Tech Background"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
