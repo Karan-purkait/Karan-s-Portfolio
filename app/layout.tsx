@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Inter, Plus_Jakarta_Sans } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 
 const inter = Inter({
@@ -26,8 +27,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.variable} ${plusJakarta.variable} font-sans bg-white text-[#0F172A] antialiased`}>
+        {/* Pehchaan AI SEO SDK Tracker */}
+        <Script
+          src="http://localhost:4000/api/v1/sdk/script.js"
+          data-site-id="6a9e60a72572ca9aac692889"
+          data-auto-apply="true"
+          strategy="afterInteractive"
+        />
+
         {children}
       </body>
     </html>
   )
 }
+
