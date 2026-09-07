@@ -15,6 +15,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 })
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://karan-purkait.vercel.app"
+const aiSeoUrl = process.env.NEXT_PUBLIC_AI_SEO_URL || "http://localhost:4000"
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -163,7 +164,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${plusJakarta.variable} font-sans bg-white text-[#0F172A] antialiased`}>
         {/* Pehchaan AI SEO SDK Tracker */}
         <Script
-          src="http://localhost:4000/api/v1/sdk/script.js"
+          src={`${aiSeoUrl}/api/v1/sdk/script.js`}
           data-site-id="6a9e60a72572ca9aac692889"
           data-auto-apply="true"
           strategy="afterInteractive"
